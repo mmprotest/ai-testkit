@@ -1,0 +1,45 @@
+{
+  "name": "sample-suite",
+  "version": "0.1.0",
+  "description": "Sample dataset for tests",
+  "defaults": {
+    "provider": "local",
+    "model": "mock",
+    "params": {
+      "temperature": 0
+    }
+  },
+  "tests": [
+    {
+      "name": "qa_case",
+      "kind": "qa",
+      "input": "{{answer}}",
+      "vars": [
+        {
+          "question": "What is 2+2?",
+          "answer": "4"
+        }
+      ],
+      "references": [
+        "4"
+      ],
+      "expect": {
+        "metric": "em",
+        "min": 1.0
+      }
+    },
+    {
+      "name": "rag_case",
+      "kind": "rag",
+      "input": "What is the capital of France?",
+      "contexts": [
+        "Paris is the capital city of France.",
+        "France has many cities including Lyon."
+      ],
+      "references": [],
+      "expect": {
+        "contains": "capital"
+      }
+    }
+  ]
+}
